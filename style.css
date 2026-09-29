@@ -1,0 +1,952 @@
+/* ═══════════════════════════════════════════════════════
+   HOJA DE ESTILOS — Portafolio Elena Nava
+   -------------------------------------------------------
+   ¿CÓMO FUNCIONA ESTE ARCHIVO?
+   1. Primero defino "variables" (colores, sombras...) para
+      cambiar todo el tema desde un solo lugar.
+   2. Luego estilo cada sección: header, hero, tarjetas...
+   3. Al final están los "media queries": reglas que solo
+      se aplican en pantallas pequeñas (móvil).
+
+   ⚠️ REGLA DE ORO: nunca declares dos veces la misma clase
+   con la misma propiedad en el archivo. La última gana
+   y eso causaba el bug del botón de desplegar.
+   ═══════════════════════════════════════════════════════ */
+
+   
+/* ─────────────────────────────────────────────
+   0. VARIABLES DEL TEMA (¡cámbialas a tu gusto!)
+   ───────────────────────────────────────────── */
+:root {
+    --primary-color: #a855f7;      /* Morado principal */
+    --primary-dark: #7e22ce;
+    --accent-color: #ec4899;       /* Rosa de acento */
+    --dark-bg: #0f0a1e;            /* Fondo oscuro */
+    --dark-bg-2: #1a1330;          /* Fondo oscuro 2 (secciones alternas) */
+    --card-bg: #171124;            /* Fondo de tarjetas */
+    --card-border: #36225e;        /* Borde de tarjetas */
+    --white: #ffffff;
+    --text-light: #e2e8f0;         /* Texto claro sobre fondo oscuro */
+    --text-muted: #94a3b8;         /* Texto gris suave */
+
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    --card-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.45);
+
+    --font-title: 'Sora', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+
+/* ─────────────────────────────────────────────
+   1. RESETEO BÁSICO
+   ───────────────────────────────────────────── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Desplazamiento suave con los enlaces del menú */
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+body.modal-open { overflow: hidden; }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/* ─────────────────────────────────────────────
+   2. HEADER Y NAVEGACIÓN
+   ───────────────────────────────────────────── */
+.header {
+    position: fixed;      /* Siempre pegado arriba */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.9rem 0;
+    transition: all 0.3s ease;
+}
+
+.nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.logo span { color: var(--primary-color); }
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-light);
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover { color: var(--primary-color); }
+
+/* Clase que agrega el JS cuando haces scroll (sombra + fondo sólido) */
+.header.scrolled {
+    padding: 0.5rem 0;
+    background-color: rgba(15, 10, 30, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Enlace activo según la sección visible (lo controla el JS) */
+.nav-link.active { color: var(--primary-color) !important; }
+
+
+/* ─────────────────────────────────────────────
+   3. HERO / INICIO
+   ───────────────────────────────────────────── */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 2rem;
+}
+
+/* "Blobs": manchas de color difuminadas de fondo */
+.hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.45;
+    z-index: 0;
+    animation: float 10s ease-in-out infinite;
+}
+
+.blob-1 {
+    width: 420px; height: 420px;
+    background: var(--primary-color);
+    top: 10%; left: 8%;
+}
+
+.blob-2 {
+    width: 380px; height: 380px;
+    background: var(--accent-color);
+    bottom: 8%; right: 8%;
+    animation-delay: -5s; /* Va "desfasada" respecto a la otra */
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-40px) scale(1.05); }
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+.hero-hello {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.hero-section h1 {
+    font-family: var(--font-title);
+    font-size: clamp(2.4rem, 6vw, 4.2rem); /* Tamaño adaptable al ancho */
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+
+/* Texto con degradado morado→rosa */
+.gradient-text {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.hero-tagline {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.hero-sub {
+    color: var(--text-muted);
+    margin: 0.6rem 0 2rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Indicador de scroll: puntito que cae dentro de un óvalo */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    width: 26px; height: 42px;
+    border: 2px solid var(--text-muted);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+}
+
+.scroll-indicator span {
+    width: 4px; height: 8px;
+    background: var(--primary-color);
+    border-radius: 4px;
+    animation: scrollDot 1.8s infinite;
+}
+
+@keyframes scrollDot {
+    0%   { transform: translateY(0);    opacity: 1; }
+    70%  { transform: translateY(14px); opacity: 0; }
+    100% { transform: translateY(0);    opacity: 0; }
+}
+
+
+/* ─────────────────────────────────────────────
+   4. BOTONES (los uso en varias secciones)
+   ───────────────────────────────────────────── */
+.btn-primary,
+.btn-secondary,
+.btn-outline {
+    display: inline-block;
+    padding: 0.85rem 1.8rem;
+    border-radius: 50px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(236, 72, 153, 0.45);
+}
+
+.btn-secondary {
+    background: var(--white);
+    color: var(--dark-bg);
+}
+
+.btn-secondary:hover { transform: translateY(-3px); }
+
+.btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.btn-full { width: 100%; }
+
+
+/* ─────────────────────────────────────────────
+   5. ESTRUCTURA GENERAL DE SECCIONES
+   ───────────────────────────────────────────── */
+.section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+
+.bg-light {
+    max-width: none;
+    background-color: var(--dark-bg-2);
+}
+
+/* Este truco mantiene el contenido centrado igual que .section */
+.bg-light > * {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-family: var(--font-title);
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+/* Línea decorativa debajo del título */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 70px; height: 4px;
+    margin: 0.8rem auto 0;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+}
+
+
+/* ─────────────────────────────────────────────
+   6. SOBRE MÍ
+   ───────────────────────────────────────────── */
+.about-container {
+    display: grid;
+    grid-template-columns: 300px 1fr; /* Columna foto + columna texto */
+    gap: 3rem;
+    align-items: center;
+    margin-top: 2.5rem;
+}
+
+.about-photo { text-align: center; }
+
+/* Tu foto, con forma orgánica y marco */
+.profile-img {
+    width: 260px;
+    height: 260px;
+    object-fit: cover;                  /* Recorta la foto para llenar el marco sin deformarla */
+    border-radius: 50% 45% 55% 48%;     /* Forma orgánica, no perfectamente redonda */
+    box-shadow: var(--card-shadow);
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    display: block;
+}
+
+.about-text p { margin-bottom: 1rem; }
+
+.about-text strong { color: var(--white); }
+
+.about-facts {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin: 1.2rem 0 1.8rem;
+}
+
+/* Píldoras informativas */
+.fact {
+    background: rgba(168, 85, 247, 0.12);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    color: var(--text-light);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+}
+
+.cv-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+
+/* ─────────────────────────────────────────────
+   7. VISOR DE CV (PDF embebido)
+   ───────────────────────────────────────────── */
+.cv-viewer {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    background: var(--white);
+}
+
+.cv-viewer object {
+    display: block;
+    border: none;
+}
+
+.pdf-fallback {
+    padding: 2rem;
+    text-align: center;
+    color: #334155;
+}
+
+.pdf-fallback a {
+    color: var(--primary-dark);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.cv-download-bar {
+    margin-top: 1.8rem;
+    text-align: center;
+}
+
+.cv-download-bar p {
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
+
+/* ─────────────────────────────────────────────
+   8. PROYECTOS POR TEMÁTICA (tableros)
+   ───────────────────────────────────────────── */
+.themes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Separación automática entre tableros */
+    margin-top: 2rem;
+}
+
+/* El contenedor principal de cada temática */
+.theme-board {
+    background: var(--dark-bg-2);
+    border: 1px solid rgba(168, 85, 247, 0.18);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-board:hover {
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.4);
+}
+
+/* Cabecera del tablero: título, descripción y botón */
+.theme-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.theme-info {
+    flex: 1; /* Toma el espacio disponible */
+    min-width: 280px;
+}
+
+.theme-info h3 {
+    font-family: var(--font-title);
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.theme-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* El botón de desplegar */
+.btn-theme {
+    min-width: 190px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────
+   9. CUADRÍCULA Y TARJETAS DE PROYECTOS
+   Tarjetas ~30% más pequeñas: 3 en fila en
+   escritorio. Al achicarse el ancho, el video
+   mantiene proporción 16:9 gracias a
+   aspect-ratio, así que la altura baja sola.
+   ───────────────────────────────────────────── */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 tarjetas fijas por fila */
+    gap: 1.25rem;
+    width: 100%;
+}
+
+/* Diseño principal de la tarjeta (compacta) */
+.project-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    overflow: hidden;          /* El video no se sale de los bordes redondeados */
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efecto al pasar el cursor (hover) */
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: #5b3a9c; /* Brillo morado */
+}
+
+/* Contenedor del reproductor de video (o imagen) */
+.project-media {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Proporción clásica de YouTube */
+    background-color: #000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-media iframe,
+.project-media img {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    object-fit: cover;
+}
+
+/* Contenedor de los textos debajo del video */
+.project-info {
+    padding: 1rem 1.1rem 1.2rem;   /* Antes era 1.5rem: reducido */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;                 /* Todas las tarjetas miden lo mismo por dentro */
+}
+
+.project-info h3 {
+    color: var(--white);
+    font-size: 1.05rem;           /* Antes 1.4rem: reducido para tarjeta compacta */
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    font-family: var(--font-title);
+}
+
+.project-date {
+    color: #e91e63;               /* Rosa neón, como en tu diseño */
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.project-desc {
+    color: #a3a0b8;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Etiquetas de tecnologías bajo la descripción */
+.project-tech {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+}
+
+.project-tech span {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.2rem 0.65rem;
+    border-radius: 50px;
+    background: rgba(168, 85, 247, 0.15);
+    color: var(--primary-color);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+/* ═══════════════════════════════════════════════════
+   ⚠️ LA CLAVE DEL BOTÓN DE DESPLEGAR:
+   Los contenedores de proyectos (.theme-projects) son
+   GRIDS (porque también tienen la clase .projects-grid
+   en el HTML) pero deben estar OCULTOS hasta que el JS
+   les agregue .show.
+
+   Como .theme-projects.show es MÁS ESPECÍFICA que
+   .projects-grid (dos clases > una clase), esta regla
+   sí gana: oculta siempre, y solo muestra cuando hay .show.
+   ═══════════════════════════════════════════════════ */
+.theme-projects {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed rgba(168, 85, 247, 0.3);
+}
+
+/* Estado cerrado (sin .show): colapsado y sin ocupar espacio */
+.theme-projects:not(.show) {
+    display: none;
+}
+
+/* Estado abierto: grid + animación de bajada */
+.theme-projects.show {
+    display: grid;
+    animation: slideDown 0.45s ease-in-out;
+}
+
+/* Modal de imágenes para los proyectos confidenciales o multipieza */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    background: rgba(5, 3, 12, 0.88);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.image-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    width: min(100%, 980px);
+    max-height: min(90vh, 820px);
+    overflow-y: auto;
+    padding: 2.5rem;
+    background: var(--dark-bg-2);
+    border: 1px solid rgba(168, 85, 247, 0.45);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+    transform: translateY(15px) scale(0.98);
+    transition: transform 0.25s ease;
+}
+
+.image-modal.is-open .modal-content { transform: translateY(0) scale(1); }
+
+.modal-content h3 {
+    margin-bottom: 1.5rem;
+    padding-right: 2rem;
+    font-family: var(--font-title);
+    color: var(--white);
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--white);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.modal-close:hover,
+.modal-close:focus-visible { background: var(--primary-color); }
+
+.modal-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.modal-gallery-grid img {
+    display: block;
+    width: 100%;
+    max-height: 420px;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+}
+
+.project-gallery-trigger { cursor: pointer; }
+
+.project-gallery-trigger:focus-visible {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 4px;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ─────────────────────────────────────────────
+   10. HABILIDADES
+   ───────────────────────────────────────────── */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.skills-category {
+    background: var(--dark-bg);
+    border: 1px solid rgba(168, 85, 247, 0.18);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: border-color 0.3s ease;
+}
+
+.skills-category:hover { border-color: rgba(168, 85, 247, 0.5); }
+
+.skills-category h3 {
+    font-family: var(--font-title);
+    margin-bottom: 1.2rem;
+    color: var(--white);
+}
+
+.skills-list li {
+    padding: 0.55rem 0 0.55rem 1.8rem;
+    position: relative;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    transition: color 0.25s, padding-left 0.25s;
+}
+
+/* Viñeta personalizada con un ✦ antes de cada habilidad */
+.skills-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+}
+
+.skills-list li:hover {
+    color: var(--white);
+    padding-left: 2.2rem;
+}
+
+
+/* ─────────────────────────────────────────────
+   11. CONTACTO
+   ───────────────────────────────────────────── */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2.5rem;
+}
+
+.contact-info p { margin-bottom: 1rem; }
+
+.contact-info a { color: var(--primary-color); }
+.contact-info a:hover { text-decoration: underline; }
+
+.social-links { margin-top: 1.5rem; }
+
+.social-btn {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    background: var(--dark-bg-2);
+    border: 1px solid rgba(168, 85, 247, 0.18);
+    border-radius: 16px;
+}
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    background: var(--dark-bg);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+}
+
+/* Mensaje de éxito (oculto hasta que el JS lo muestra) */
+.form-success-msg {
+    display: none;
+    padding: 0.9rem;
+    color: #6ee7b7;
+    font-weight: 600;
+    text-align: center;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 10px;
+}
+
+
+/* ─────────────────────────────────────────────
+   12. FOOTER
+   ───────────────────────────────────────────── */
+.footer-bar {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+
+/* ─────────────────────────────────────────────
+   13. ANIMACIÓN "REVEAL" (aparecer al hacer scroll)
+   ───────────────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ─────────────────────────────────────────────
+   14. MENÚ HAMBURGUESA (estado base: oculto en
+       escritorio, el media query lo muestra)
+   ───────────────────────────────────────────── */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.menu-toggle span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Las 3 rayas se transforman en X (el JS agrega .open) */
+.menu-toggle.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+
+/* ─────────────────────────────────────────────
+   15. MEDIA QUERIES — DISEÑO RESPONSIVE
+   ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    /* En pantallas medianas: 2 tarjetas por fila */
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+
+    .menu-toggle { display: flex; }
+
+    /* El menú se convierte en panel lateral que
+       entra deslizando desde la derecha */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;               /* Empieza fuera de la pantalla */
+        width: 75%;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.2rem;
+        background-color: var(--dark-bg-2);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-menu.open { right: 0; }
+
+    .nav-menu a { font-size: 1.15rem; }
+
+    /* Sobre mí y contacto pasan a una sola columna */
+    .about-container,
+    .contact-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .cv-buttons,
+    .about-facts { justify-content: center; }
+
+    .section { padding: 4rem 1.4rem; }
+
+    /* 1 tarjeta por fila en móvil */
+    .projects-grid { grid-template-columns: 1fr; }
+
+    /* El visor del CV un poco más bajo en móvil */
+    .cv-viewer object { height: 480px; }
+
+    /* Cabecera del tablero apilada y botón a todo lo ancho */
+    .theme-header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: left;
+    }
+
+    .btn-theme { width: 100%; }
+
+    .modal-content { padding: 2.5rem 1rem 1rem; }
+    .modal-gallery-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elena Nava | Portafolio Creativo</title>
+
+    <!-- Tipografía de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Nuestros estilos -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="resources/img/mI-LOGO.png">
+</head>
+<body>
+
+    <!-- PANTALLA EMERGENTE PARA LAS GALERÍAS DE DISEÑO -->
+    <div class="image-modal" id="imageModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Cerrar galería">&times;</button>
+            <h3 id="modalTitle">Galería del proyecto</h3>
+            <div class="modal-gallery-grid" id="modalGalleryGrid"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         MENÚ DE NAVEGACIÓN (fijo arriba)
+         ═══════════════════════════════════════════ -->
+    <header class="header" id="header">
+        <nav class="nav">
+            <a href="#inicio" class="logo">E<span>.</span>Nava</a>
+
+            <!-- Botón hamburguesa: solo visible en móvil -->
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                <li><a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
+                <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+                <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+                <li><a href="#cv" class="nav-link">CV</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ═══════════════════════════════════════════
+         HERO / INICIO — primera impresión
+         ═══════════════════════════════════════════ -->
+    <section id="inicio" class="hero-section">
+        <!-- Figuras decorativas de fondo -->
+        <div class="hero-blob blob-1"></div>
+        <div class="hero-blob blob-2"></div>
+
+        <div class="hero-content">
+            <p class="hero-hello">👋 ¡Hola! Bienvenida/o a mi espacio creativo</p>
+            <h1>Soy <span class="gradient-text">Elena Nava</span></h1>
+            <p class="hero-tagline">Ingeniera en Entornos Virtuales y Negocios Digitales</p>
+            <p class="hero-sub">Diseño gráfico · Modelado 3D · Marketing Digital</p>
+            <div class="hero-buttons">
+                <a href="#proyectos" class="btn-primary">Ver mis proyectos</a>
+                <a href="#cv" class="btn-outline">📄 Ver mi CV</a>
+            </div>
+        </div>
+
+        <!-- Indicador de scroll animado -->
+        <a href="#sobre-mi" class="scroll-indicator" aria-label="Bajar a la siguiente sección">
+            <span></span>
+        </a>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SOBRE MÍ
+         ═══════════════════════════════════════════ -->
+    <section id="sobre-mi" class="section">
+        <h2 class="section-title">Sobre Mí</h2>
+        <div class="about-container">
+            <!-- Tu foto: reemplaza resources/img/ori.jpg por tu foto real -->
+            <div class="about-photo reveal">
+                <img src="resources/img/ori.jpg" alt="Foto de Elena Nava" class="profile-img">
+            </div>
+
+            <div class="about-text reveal">
+                <p>
+                    Soy graduada como <strong>TSU</strong> y actualmente curso la
+                    <strong>Ingeniería en Entornos Virtuales y Negocios Digitales</strong>
+                    en la Universidad Tecnológica de León.
+                </p>
+                <p>
+                    Cuento con habilidades en diseño gráfico, modelado 3D,
+                    desarrollo en Unity y marketing digital. Me apasiona crear
+                    experiencias visuales que cuenten historias.
+                </p>
+
+                <!-- Datos rápidos en formato de "píldoras" -->
+                <div class="about-facts">
+                    <span class="fact">🎓 TSU graduada</span>
+                    <span class="fact">🚀 En formación</span>
+                    <span class="fact">📍 León, Gto.</span>
+                </div>
+
+                <!-- Botones de CV: VER (baja al visor) y DESCARGAR -->
+                <div class="cv-buttons">
+                    <button class="btn-primary" id="btnVerCV">👁️ Ver CV</button>
+                    <a href="resources/pdf/Cv_Elena_Nava.pdf" class="btn-secondary" download="CV_Elena_Nava.pdf">
+                        ⬇️ Descargar CV (PDF)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CV — VISOR EMBEBIDO + DESCARGA
+         El PDF se muestra DENTRO de la página.
+         Para poner TU diseño: reemplaza el archivo
+         "resources/pdf/Cv_Elena_Nava.pdf" por el tuyo
+         manteniendo el mismo nombre (o cambia la
+         ruta en el <object> de abajo).
+         ═══════════════════════════════════════════ -->
+    <section id="cv" class="section bg-light">
+        <h2 class="section-title">Mi Currículum</h2>
+        <p class="section-subtitle">Échale un vistazo directamente aquí, sin salir de la página.</p>
+
+        <div class="cv-viewer reveal">
+            <object data="resources/pdf/Cv_Elena_Nava.pdf#toolbar=1" type="application/pdf" width="100%" height="640px">
+                <p class="pdf-fallback">
+                    Tu navegador no puede mostrar el PDF embebido.
+                    <a href="resources/pdf/Cv_Elena_Nava.pdf" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>
+                    o descárgalo con el botón de abajo.
+                </p>
+            </object>
+        </div>
+
+        <div class="cv-download-bar reveal">
+            <p>¿Te gustó? Llévatelo contigo:</p>
+            <a href="resources/pdf/Cv_Elena_Nava.pdf" class="btn-primary" download="CV_Elena_Nava.pdf">
+                ⬇️ Descargar CV en PDF
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PROYECTOS POR TEMÁTICA
+         Cada tablero tiene un botón que despliega
+         sus tarjetas. IMPORTANTE: en los <iframe>
+         de YouTube reemplaza ID_VIDEO_1, ID_VIDEO_2...
+         por el ID real de cada video (la parte final
+         de la URL: youtube.com/watch?v=ESTA_PARTE).
+         También puedes usar imágenes en vez de video:
+         <img src="resources/img/proyecto1.jpg" alt="...">
+         ═══════════════════════════════════════════ -->
+    <section id="proyectos" class="section">
+        <h2 class="section-title">Mis Proyectos</h2>
+        <p class="section-subtitle">Explora mi trabajo dividido por áreas de especialidad.</p>
+
+        <div class="themes-container">
+
+            <!-- TABLERO 1: Diseño Gráfico y Marketing -->
+            <div class="theme-board reveal">
+                <div class="theme-header">
+                    <div class="theme-info">
+                        <h3>🎨 Marketing y Diseño</h3>
+                        <p>Creación de identidad visual, logotipos, material publicitario y contenido confidencial optimizado.</p>
+                    </div>
+                    <button class="btn-primary btn-theme" data-target="tema-diseno" aria-expanded="false">Ver proyectos ▼</button>
+                </div>
+
+                <div class="theme-projects projects-grid" id="tema-diseno">
+                    <!-- Proyecto 1: Abre galería con varias imágenes -->
+                    <article class="project-card project-gallery-trigger" tabindex="0" role="button" aria-label="Abrir galería de Identidad Visual de Hiertec" data-images='["resources/img/Identidad_Hiertec.jpg","resources/img/gafete_1.jpg","resources/img/Ver-folleto.jpg"]'>
+                        <div class="project-media">
+                            <img src="resources/img/logo_Hiertec.jpg" alt="Logo Hiertec" loading="lazy">
+                        </div>
+                        <div class="project-info">
+                            <h3>Creacion y diseño de identidad visual de Hiertec</h3>
+                            <p class="project-date">2026</p>
+                            <p class="project-desc">Desarrollo de identidad visual completa para Hiertec como empresa y su proyecto Ecotech, incluyendo logotipo, colores, patrones y creación de una mascota.</p>
+                            <div class="project-tech">
+                                <span>Affinity</span>
+                                <span>Illustrator</span>
+                                <span>Branding</span>
+                                <span>📁 Ver galería</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 2 -->
+                    <article class="project-card project-gallery-trigger" tabindex="0" role="button" aria-label="Abrir galería de Identidad Visual de Marca" data-images='["resources/img/metoo.jpg"]'>
+                        <div class="project-media">
+                            <img src="resources/img/Ilustraitor.png" alt="Rediseño de Identidad Visual" loading="lazy">
+                        </div>
+                        <div class="project-info">
+                            <h3>Imagen meToo</h3>
+                            <p class="project-date">2025</p>
+                            <p class="project-desc">Ilustración de fotografia en adobe illustrator.</p>
+                            <div class="project-tech">
+                                <span>Illustrator</span>
+                                <span>📁 Ver galería</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- TABLERO 2: Modelado 3D -->
+            <div class="theme-board reveal">
+                <div class="theme-header">
+                    <div class="theme-info">
+                        <h3>🧊 Modelado y Animación 3D</h3>
+                        <p>Diseño y modelado de assets, personajes y escenarios virtuales optimizados para motores gráficos como Unity.</p>
+                    </div>
+                    <button class="btn-primary btn-theme" data-target="tema-3d" aria-expanded="false">Ver proyectos ▼</button>
+                </div>
+
+                <div class="theme-projects projects-grid" id="tema-3d">
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/Rz36uj3wTPE" title="Campaña Publicitaria X" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Animación de personaje 3D básica</h3>
+                            <p class="project-date">2024</p>
+                            <p class="project-desc">Video renderizado en blender, personaje 3D de distintas acciones.</p>
+                            <div class="project-tech">
+                                <span>Blender</span>
+                                <span>Animación 3D</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/SHe2GqGOoOQ" title="Rediseño de App" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Referencia vs animacoón 3D</h3>
+                            <p class="project-date">2025</p>
+                            <p class="project-desc">Comparación de referencia en realidad con animación sobre modelo 3D de mixamo.</p>
+                            <div class="project-tech">
+                                <span>Blender</span>
+                                <span>Animación 3D</span>
+                                <span>Edición de video</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/7tFqFc5lWu4" title="Material POS" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Fuente con fisicas</h3>
+                            <p class="project-date">2025</p>
+                            <p class="project-desc">Fuente con física aplicados, modelada y animada en Blender.</p>
+                            <div class="project-tech">
+                                <span>Blender</span>
+                                <span>Animación 3D</span>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <!-- TABLERO 3: Marketing Digital -->
+            <div class="theme-board reveal">
+                <div class="theme-header">
+                    <div class="theme-info">
+                        <h3>📈 Desarrollo de Videojuegos 2D y 3D</h3>
+                        <p>Desarrollo de videojuegos 2D y 3D con el motor de Unity, Desarrollo creativo y planeación.</p>
+                    </div>
+                    <button class="btn-primary btn-theme" data-target="tema-marketing" aria-expanded="false">Ver proyectos ▼</button>
+                </div>
+
+                <div class="theme-projects projects-grid" id="tema-marketing">
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/Hw1sizaSACY" title="NinjaGL" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Videojuego 2D: NinjaGL</h3>
+                            <p class="project-date">2026</p>
+                            <p class="project-desc">Crecimiento de videojuego 2D con mecánicas de acción y aventura desde Unity.</p>
+                            <div class="project-tech">
+                                <span>Unity</span>
+                                <span>Visual Studio</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/27JULEwWQ_I" title="Ecenario del videojuego 3D" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Ecenario del videojuego 3D</h3>
+                            <p class="project-date">2024</p>
+                            <p class="project-desc">Diseño y desarrollo de escenarios para videojuego 3D en Unity.</p>
+                            <div class="project-tech">
+                                <span>Unity</span>
+                                <span>Visual Studio</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/8nKWnSYbH9Y" title="Contenido Grupo Labro" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Gamenplay Enemigos en Videojuego 3D</h3>
+                            <p class="project-date">2026</p>
+                            <p class="project-desc">Demostración de mecanismos de juego para enemigos en un videojuego 3D.</p>
+                            <div class="project-tech">
+                                <span>Unity</span>
+                                <span>Visual Studio</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <!--TABLERO 4: Edición de videos -->
+            <div class="theme-board reveal">
+                <div class="theme-header">
+                    <div class="theme-info">
+                        <h3>📹 Edición de videos</h3>
+                        <p>Edición y postproducción de videos en after effects y premiere pro.</p>
+                    </div>
+                    <button class="btn-primary btn-theme" data-target="tema-Educiom" aria-expanded="false">Ver proyectos ▼</button>
+                </div>
+
+                <div class="theme-projects projects-grid" id="tema-Educiom">
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/LoiUstCwKWA" title="NinjaGL" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Video promocional CEA</h3>
+                            <p class="project-date">2026</p>
+                            <p class="project-desc">Creación de video promocional CEA justicia social.</p>
+                            <p class="project-desc">Proyecto escolar sin fines de lucro.</p>
+                            <div class="project-tech">
+                                <span>After Effects</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/pkf9o_lsqL0" title="NinjaGL" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Efectos en texto</h3>
+                            <p class="project-date">2025</p>
+                            <p class="project-desc">Creación de efectos visuales en texto utilizando After Effects.</p>
+                            <div class="project-tech">
+                                <span>After Effects</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/hBBl5Tgn2nc" title="Ecenario del videojuego 3D" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Mocumental corto moda</h3>
+                            <p class="project-date">2024</p>
+                            <p class="project-desc">Resultado de un mocumental corto sobre la tendencia de la moda.</p>
+                            <div class="project-tech">
+                                <span>Adobe Premiere</span>
+                                <span>Adobe After Effects</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://www.youtube.com/embed/BP7Y_vT6XXI" title="Contenido Grupo Labro" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-info">
+                            <h3>Efecto morph en iconos</h3>
+                            <p class="project-date">2025</p>
+                            <p class="project-desc">Demostración de efectos de transformación para iconos en un entorno 2D.</p>
+                            <div class="project-tech">
+                                <span>Adobe After Effects</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         HABILIDADES
+         ═══════════════════════════════════════════ -->
+    <section id="habilidades" class="section bg-light">
+        <h2 class="section-title">Habilidades Técnicas</h2>
+        <div class="skills-container">
+
+            <div class="skills-category reveal">
+                <h3>🖥️ Softwares</h3>
+                <ul class="skills-list">
+                    <li>Adobe Photoshop</li>
+                    <li>Adobe Illustrator</li>
+                    <li>Adobe Premiere</li>
+                    <li>Adobe After Effects</li>
+                    <li>Canva</li>
+                    <li>Affinity</li>
+                    <li>Unity</li>
+                    <li>Blender / 3D</li>
+                    <li>Visual Studio</li>
+                    <li>Visual Studio Code</li>
+                </ul>
+            </div>
+
+            <div class="skills-category reveal">
+                <h3>💡 Áreas de Conocimiento</h3>
+                <ul class="skills-list">
+                    <li>Diseño Gráfico</li>
+                    <li>Modelado 3D</li>
+                    <li>Marketing Digital</li>
+                    <li>Frontend (HTML & CSS)</li>
+                    <li>Desarrollo de videojuegos</li>
+                    <li>Producción y edición de video</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACTO
+         ═══════════════════════════════════════════ -->
+    <section id="contacto" class="section">
+        <h2 class="section-title">Contacto</h2>
+        <p class="section-subtitle">¿Tienes un proyecto en mente? ¡Hablemos!</p>
+
+        <div class="contact-container">
+            <div class="contact-info reveal">
+                <p><strong>✉️ Correo:</strong>
+                    <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=GTvVlcSHwfRSDgBZdmbmGSFRxmVnzrgsrRkTDqdCPjjgpdGbzxhFmKwQhkVpstFVGtlvcVgvrXfMT"><span class="__cf_email__" data-cfemail="711f1007101f141603140514141d141f101c1e1f02140303100531161c10181d5f121e1c">navanegreteelenamonserrat@gmail.com</span></a>
+                </p>
+                <p><strong>📞 Teléfono:</strong>
+                    <a href="tel:4776914897">477 - 691 - 4897</a>
+                </p>
+                <p><strong>📍 Ubicación:</strong> León, Guanajuato, México</p>
+                <!-- Descomenta si quieres mostrar tu GitHub:
+                <div class="social-links">
+                    <a href="https://github.com/elenamnn125" target="_blank" rel="noopener" class="social-btn">GitHub</a>
+                </div>
+                -->
+            </div>
+
+            <!-- Al enviarlo se abre Gmail con el mensaje
+                 ya redactado (funciona sin servidor) -->
+            <form class="contact-form reveal" id="contactForm">
+                <div class="form-group">
+                    <label for="nombre">Tu nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="¿Cómo te llamas?" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Tu correo</label>
+                    <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="Cuéntame tu idea..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary btn-full">Enviar mensaje ✈️</button>
+                <p class="form-success-msg" id="formSuccess">
+                    ✅ ¡Listo! Se abrirá Gmail con el mensaje listo para enviarme.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer-bar">
+        <p>Hecho con 💜 y mucho café · &copy; 2026 Elena Nava</p>
+    </footer>
+
+    <!-- Nuestro JavaScript (siempre al final del body) -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+</body>
+</html>
